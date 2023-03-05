@@ -211,6 +211,35 @@ public:
         return _Size;
     }
 
+    bool IsEmpty()
+    {
+        return (_Size == 0 ? true : false);
 
+    }
+
+    void Clear()
+    {
+        while (_Size > 0)
+        {
+            DeleteFirstNode();
+        }
+    }
+
+
+    void  Reverse()
+    {
+        Node* current = head;
+        Node* temp = nullptr;
+        while (current != nullptr) {
+            temp = current->prev;
+            current->prev = current->next;
+            current->next = temp;
+            current = current->prev;
+        }
+
+        if (temp != nullptr) {
+            head = temp->prev;
+        }
+    }
 
 };
