@@ -1,94 +1,216 @@
 #pragma once
+
 #include <iostream>
 using namespace std;
 
-template<class T>
+
+template <class T>
 class clsDblLinkedList
 {
+
+protected:
+    int _Size = 0;
+
 public:
-	class Node
-	{
-	public:
-		T value;
-		Node* next;
-		Node* previous;
-	};
-	Node* head = NULL;
 
-	void Print()
-	{
-		cout << "\n";
-		while (head != NULL) {
-			cout << head->value << " ";
-			head = head->next;
-		}
-	}
-	void InsertAtBeginning(int value)
-	{
-		// Allocate memory to a node
-		Node* new_node = new Node();
-
-		// insert the data
-		new_node->value = value;
-		new_node->next = head;
-
-		// Move head to new node
-		head = new_node;
-
-	}
-    Node* Find(Node* head, int Value)
+    class Node
     {
 
-        while (head != NULL) {
+    public:
+        T value;
+        Node* next;
+        Node* prev;
+    };
 
-            if (head->value == Value)
-                return head;
+    Node* head = NULL;
 
+    void InsertAtBeginning(T value)
+    {
 
-            head = head->next;
+        /*
+            1-Create a new node with the desired value.
+            2-Set the next pointer of the new node to the current head of the list.
+            3-Set the previous pointer of the current head to the new node.
+            4-Set the new node as the new head of the list.
+        */
+
+        Node* newNode = new Node();
+        newNode->value = value;
+        newNode->next = head;
+        newNode->prev = NULL;
+
+        if (head != NULL) {
+            head->prev = newNode;
+        }
+        head = newNode;
+        _Size++;
+
+    }
+
+    // Print the linked list
+    void PrintList()
+
+    {
+        Node* Current = head;
+
+        while (Current != NULL) {
+            cout << Current->value << " ";
+            Current = Current->next;
+        }
+        cout << "\n";
+        delete Current;
+
+    }
+
+    Node* Find(T Value)
+    {
+        Node* Current = head;
+        while (Current != NULL) {
+
+            if (Current->value == Value)
+                return Current;
+
+            Current = Current->next;
         }
 
         return NULL;
 
     }
 
-    // Insert a node after a node
-    void InsertAfter(Node* Prev_node, int Value) {
+    void InsertAfter(Node* current, T value) {
 
-        if (Prev_node == NULL) {
-            cout << "the given Previous node cannot be NULL";
-            return;
+
+        /*  1 - Create a new node with the desired value.
+             2-Set the next pointer of the new node to the next node of the current node.
+             3-Set the previous pointer of the new node to the current node.
+             4-Set the next pointer of the current node to the new node.
+             5-Set the previous pointer of the next node to the new node(if it exists).
+        */
+
+        Node* newNode = new Node();
+        newNode->value = value;
+        newNode->next = current->next;
+        newNode->prev = current;
+
+        if (current->next != NULL) {
+            current->next->prev = newNode;
         }
+        current->next = newNode;
+        _Size++;
 
-        Node* new_node = new Node();
-        new_node->value = Value;
-        new_node->next = Prev_node->next;
-        Prev_node->next = new_node;
     }
 
+    void InsertAtEnd(T value) {
 
-    // Insert at the end
-    void InsertAtEnd(Node*& head, int Value) {
+        /*
+            1-Create a new node with the desired value.
+            2-Traverse the list to find the last node.
+            3-Set the next pointer of the last node to the new node.
+            4-Set the previous pointer of the new node to the last node.
+        */
 
-        Node* new_node = new Node();
 
-        new_node->value = Value;
-        new_node->next = NULL;
+        Node* newNode = new Node();
+        newNode->value = value;
+        newNode->next = NULL;
+        if (head == NULL) {
+            newNode->prev = NULL;
+            head = newNode;
+        }
+        else {
+            Node* current = head;
+            while (current->next != NULL) {
+                current = current->next;
+            }
+            current->next = newNode;
+            newNode->prev = current;
+        }
+        _Size++;
+
+    }
+
+    void DeleteNode(Node*& NodeToDelete) {
+
+        /*
+            1-Set the next pointer of the previous node to the next pointer of the current node.
+            2-Set the previous pointer of the next node to the previous pointer of the current node.
+            3-Delete the current node.
+        */
+        if (head == NULL || NodeToDelete == NULL) {
+            return;
+        }
+        if (head == NodeToDelete) {
+            head = NodeToDelete->next;
+        }
+        if (NodeToDelete->next != NULL) {
+            NodeToDelete->next->prev = NodeToDelete->prev;
+        }
+        if (NodeToDelete->prev != NULL) {
+            NodeToDelete->prev->next = NodeToDelete->next;
+        }
+        delete NodeToDelete;
+
+        _Size--;
+    }
+
+    void DeleteFirstNode()
+    {
+
+        /*
+            1-Store a reference to the head node in a temporary variable.
+            2-Update the head pointer to point to the next node in the list.
+            3-Set the previous pointer of the new head to NULL.
+            4-Delete the temporary reference to the old head node.
+        */
 
         if (head == NULL) {
-            head = new_node;
+            return;
+        }
+        Node* temp = head;
+        head = head->next;
+        if (head != NULL) {
+            head->prev = NULL;
+        }
+        delete temp;
+        _Size--;
+    }
+
+    void DeleteLastNode() {
+
+        /*
+            1-Traverse the list to find the last node.
+            2-Set the next pointer of the second-to-last node to NULL.
+            3-Delete the last node.
+        */
+
+        if (head == NULL) {
             return;
         }
 
-        Node* LastNode = head;
-        while (LastNode->next != NULL)
-        {
-            LastNode = LastNode->next;
+        if (head->next == NULL) {
+            delete head;
+            head = NULL;
+            return;
         }
 
-        LastNode->next = new_node;
-        return;
+        Node* current = head;
+        // we need to find the node before last node.
+        while (current->next->next != NULL)
+        {
+            current = current->next;
+        }
+
+        Node* temp = current->next;
+        current->next = NULL;
+        delete temp;
+        _Size--;
     }
 
-};
+    int Size()
+    {
+        return _Size;
+    }
 
+
+
+};
