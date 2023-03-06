@@ -18,12 +18,13 @@ int main()
     cout << "\nLinked List Contenet:\n";
     MydblLinkedList.PrintList();
 
-    MydblLinkedList.Reverse();
+    MydblLinkedList.UpdateItem(20, 500);
 
-    cout << "\nLinked List Contenet after reverse:\n";
+    cout << "\nAfter Updating Item(2): " << "\n";
     MydblLinkedList.PrintList();
 
-    cout << MydblLinkedList.GetItem(2);
+
+
     system("pause>0");
 
 }
