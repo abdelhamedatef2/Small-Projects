@@ -275,6 +275,7 @@ public:
             return ItemNode->value;
 
     }
+
     bool UpdateItem(int Index, T NewValue)
     {
         Node* ItemNode = GetNode(Index);
@@ -288,5 +289,19 @@ public:
             return false;
 
     }
+
+
+    bool InsertAfter(int Index, T value)
+    {
+        Node* ItemNode = GetNode(Index);
+        if (ItemNode != NULL)
+        {
+            InsertAfter(ItemNode, value);
+            return true;
+        }
+        else
+            return false;
+    }
+
 
 };
