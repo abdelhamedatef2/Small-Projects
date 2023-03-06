@@ -50,34 +50,52 @@ public:
 	{
 		return _MyList.GetItem(Size() - 1);
 	}
+
 	T GetItem(int Index)
 	{
 		return _MyList.GetItem(Index);
+
 	}
+
 	void Reverse()
 	{
-		return _MyList.Reverse();
+
+		_MyList.Reverse();
+
 	}
-	bool UpdateItem(int Index, T NewValue)
+
+	void UpdateItem(int Index, T NewValue)
 	{
-		return _MyList.UpdateItem(Index, NewValue);
+		_MyList.UpdateItem(Index, NewValue);
+
 	}
-	bool InsertAfter(int Index, T value)
+
+	void InsertAfter(int Index, T NewValue)
 	{
-		return _MyList.InsertAfter(Index, value);
+		_MyList.InsertAfter(Index, NewValue);
 	}
-	void InsertAtFront(T value)
+
+
+	void InsertAtFront(T Value)
 	{
-		return _MyList.InsertAtBeginning(value);
+		_MyList.InsertAtBeginning(Value);
+
 	}
-	void InsertAtBack(int value)
+
+	void InsertAtBack(T Value)
 	{
-		return _MyList.InsertAtEnd(value);
+		_MyList.InsertAtEnd(Value);
+
+
 	}
+
+
 	void Clear()
 	{
-		return _MyList.Clear();
+		_MyList.Clear();
 	}
-};
 
+
+
+};
 
