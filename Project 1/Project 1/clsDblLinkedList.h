@@ -46,31 +46,6 @@ public:
         _Size++;
 
     }
-    void InsertAtEnd(int value) {
-
-        /*
-            1-Create a new node with the desired value.
-            2-Traverse the list to find the last node.
-            3-Set the next pointer of the last node to the new node.
-            4-Set the previous pointer of the new node to the last node.
-        */
-
-        Node* newNode = new Node();
-        newNode->value = value;
-        newNode->next = NULL;
-        if (head == NULL) {
-            newNode->prev = NULL;
-            head = newNode;
-        }
-        else {
-            Node* current = head;
-            while (current->next != NULL) {
-                current = current->next;
-            }
-            current->next = newNode;
-            newNode->prev = current;
-        }
-    }
 
     // Print the linked list
     void PrintList()
@@ -125,6 +100,34 @@ public:
 
     }
 
+    void InsertAtEnd(T value) {
+
+        /*
+            1-Create a new node with the desired value.
+            2-Traverse the list to find the last node.
+            3-Set the next pointer of the last node to the new node.
+            4-Set the previous pointer of the new node to the last node.
+        */
+
+
+        Node* newNode = new Node();
+        newNode->value = value;
+        newNode->next = NULL;
+        if (head == NULL) {
+            newNode->prev = NULL;
+            head = newNode;
+        }
+        else {
+            Node* current = head;
+            while (current->next != NULL) {
+                current = current->next;
+            }
+            current->next = newNode;
+            newNode->prev = current;
+        }
+        _Size++;
+
+    }
 
     void DeleteNode(Node*& NodeToDelete) {
 
