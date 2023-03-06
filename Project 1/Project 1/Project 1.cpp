@@ -1,6 +1,3 @@
-//ProgrammingAdvices.com
-//Mohammed Abu-Hadhoud
-
 #include <iostream>
 #include "clsDblLinkedList.h"
 
@@ -21,8 +18,12 @@ int main()
     cout << "\nLinked List Contenet:\n";
     MydblLinkedList.PrintList();
 
-    cout << "\nNumber of items in the linked list = " << MydblLinkedList.Size();
+    MydblLinkedList.Reverse();
 
+    cout << "\nLinked List Contenet after reverse:\n";
+    MydblLinkedList.PrintList();
+
+    cout << MydblLinkedList.GetItem(2);
     system("pause>0");
 
 }
