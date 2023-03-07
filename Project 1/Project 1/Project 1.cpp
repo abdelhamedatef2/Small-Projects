@@ -1,3 +1,6 @@
+//ProgrammingAdvices.com
+//Mohammed Abu-Hadhoud
+
 #include <iostream>
 #include "clsDynamicArray.h"
 
@@ -20,20 +23,12 @@ int main()
 
     MyDynamicArray.PrintList();
 
-    cout << "\nItem(2): " << MyDynamicArray.GetItem(2) << "\n";
-
-
-  /*  MyDynamicArray.Reverse();
-
-    cout << "\nArray Items after reverse: \n";
-    MyDynamicArray.PrintList();*/
-
-    MyDynamicArray.Clear();
-
-    cout << "\nArray Items after clear: \n";
+    MyDynamicArray.InsertAt(2, 500);
+    cout << "\n\nArray after insert 500 at index 2:";
+    cout << "\nArray Size: " << MyDynamicArray.Size() << "\n";
     MyDynamicArray.PrintList();
 
-    system("pause>0");
 
+    system("pause>0");
 
 }

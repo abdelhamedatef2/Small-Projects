@@ -35,7 +35,7 @@ public:
     bool SetItem(int index, T Value)
     {
 
-        if (index >= _Size || _Size < 0)
+        if (index >= _Size)
         {
             return false;
         }
@@ -70,14 +70,9 @@ public:
 
     }
 
+
     void Resize(int NewSize)
     {
-
-        if (NewSize < 0)
-        {
-            NewSize = 0;
-        };
-
         _TempArray = new T[NewSize];
 
         //limit the original size to the new size if it is less.
@@ -97,14 +92,6 @@ public:
 
     }
 
-
-    T GetItem(int index)
-    {
-        return OriginalArray[index];
-
-    }
-
-
     void  Reverse()
     {
 
@@ -123,7 +110,6 @@ public:
 
     }
 
-
     void Clear()
     {
         _Size = 0;
@@ -131,24 +117,113 @@ public:
         delete[] OriginalArray;
         OriginalArray = _TempArray;
     }
-    bool DeleteItemAt(int Index) {
-        if (Index < 0 || Index >= _Size) {
+
+    T GetItem(int index)
+    {
+        return OriginalArray[index];
+
+    }
+
+
+    bool DeleteItemAt(int index)
+    {
+
+        if (index >= _Size || index < 0)
+        {
             return false;
         }
-        _TempArray = new T[_Size - 1];
-        int Counter = 0;
-        for (int i = 0; i < _Size; i++) {
-            if (i != Index) {
-                _TempArray[Counter] = OriginalArray[i];
-                Counter++;
-            }
+
+        _Size--;
+
+        _TempArray = new T[_Size];
+
+        //copy all before index
+        for (int i = 0; i < index; i++)
+        {
+            _TempArray[i] = OriginalArray[i];
+        }
+
+        //copy all after index
+        for (int i = index + 1; i < _Size + 1; i++)
+        {
+            _TempArray[i - 1] = OriginalArray[i];
         }
 
         delete[] OriginalArray;
         OriginalArray = _TempArray;
-        _Size = _Size - 1;
         return true;
+
+    }
+
+    void DeleteFirstItem()
+    {
+
+        DeleteItemAt(0);
+
+    }
+
+    void DeleteLastItem()
+    {
+
+        DeleteItemAt(_Size - 1);
+    }
+
+    int Find(T Value)
+    {
+        for (int i = 0; i < _Size; i++)
+        {
+            if (OriginalArray[i] == Value)
+            {
+                return i;
+            }
+        }
+        return -1;
+
     }
 
 
+    bool DeleteItem(T Value) {
+
+        int index = Find(Value);
+
+        if (index == -1)
+        {
+            return false;
+        }
+
+        DeleteItemAt(index);
+        return true;
+
+    }
+  
+    bool InsertAt(T index, T value) {
+
+        if (index > _Size || index < 0)
+        {
+            return false;
+        }
+
+        _Size++;
+
+        _TempArray = new T[_Size];
+
+        //copy all before index
+        for (int i = 0; i < index; i++)
+        {
+            _TempArray[i] = OriginalArray[i];
+        }
+
+        _TempArray[index] = value;
+
+        //copy all from index
+        for (int i = index; i < _Size - 1; i++)
+        {
+            _TempArray[i + 1] = OriginalArray[i];
+        }
+
+        delete[] OriginalArray;
+        OriginalArray = _TempArray;
+        return true;
+
+    }
 };
