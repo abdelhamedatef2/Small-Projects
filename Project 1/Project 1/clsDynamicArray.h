@@ -224,6 +224,21 @@ public:
         delete[] OriginalArray;
         OriginalArray = _TempArray;
         return true;
-
+    }
+    void InsertAtBeginning(T value)
+    {
+         InsertAt(0,value);
+    }
+    void InsertBefore(T index, T value)
+    {
+        InsertAt(index-1, value);
+    }
+    void InsertAfter(T index, T value)
+    {
+        InsertAt(index + 1, value);
+    }
+    void InsertAtEnd(T value)
+    {
+        InsertAt(_Size-1, value);
     }
 };
