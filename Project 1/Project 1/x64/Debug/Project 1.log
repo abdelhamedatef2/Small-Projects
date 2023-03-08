@@ -1,22 +1,2 @@
 ﻿  Project 1.cpp
-C:\Users\abdel\source\repos\Projects\Project 1\Project 1\clsMyQueueArr.h(69,11): error C2039: 'UpdateItem': is not a member of 'clsDynamicArray<T>'
-          with
-          [
-              T=int
-          ]
-C:\Users\abdel\source\repos\Projects\Project 1\Project 1\clsMyQueueArr.h(14,2): message : see declaration of 'clsDynamicArray<T>'
-          with
-          [
-              T=int
-          ]
-C:\Users\abdel\source\repos\Projects\Project 1\Project 1\clsMyQueueArr.h(68,1): message : while compiling class template member function 'void clsMyQueueArr<int>::UpdateItem(int,T)'
-          with
-          [
-              T=int
-          ]
-C:\Users\abdel\source\repos\Projects\Project 1\Project 1\Project 1.cpp(39,23): message : see reference to function template instantiation 'void clsMyQueueArr<int>::UpdateItem(int,T)' being compiled
-          with
-          [
-              T=int
-          ]
-C:\Users\abdel\source\repos\Projects\Project 1\Project 1\Project 1.cpp(9,25): message : see reference to class template instantiation 'clsMyQueueArr<int>' being compiled
+  Project 1.vcxproj -> C:\Users\abdel\source\repos\Projects\Project 1\x64\Debug\Project 1.exe
