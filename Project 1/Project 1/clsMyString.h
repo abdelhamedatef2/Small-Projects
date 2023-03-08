@@ -1,23 +1,56 @@
 #pragma once
-#include"clsMyStack.h"
+
+#include <stack>
+
 using namespace std;
 
-template <class T>
-class clsMyString 
+class clsMyString
 {
-protected:
-	clsMyStack<T>_MyList;
-	T _Value;
+
+private:
+
+	stack <string> _Undo;
+	stack <string> _Redo;
+	string _Value;
+
 public:
-	
-	void SetVlaue(T Value)
+
+	void Set(string value)
 	{
-		_Value = Value;
+		_Undo.push(_Value);
+		_Value = value;
 	}
-	T GetValue()
+
+	string Get()
 	{
 		return _Value;
 	}
 
-};
+	__declspec(property(get = Get, put = Set)) string Value;
 
+
+	void Undo()
+	{
+
+		if (!_Undo.empty())
+		{
+			_Redo.push(_Value);
+			_Value = _Undo.top();
+			_Undo.pop();
+		}
+
+	}
+
+	void Redo()
+	{
+
+		if (!_Redo.empty())
+		{
+			_Undo.push(_Value);
+			_Value = _Redo.top();
+			_Redo.pop();
+		}
+
+
+	}
+};

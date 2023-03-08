@@ -1,29 +1,29 @@
 #pragma once
 
 #include <iostream>
-#include "clsMyQueue.h"
+#include "clsMyQueueArr.h"
 using namespace std;
 template <class T>
 
-class  clsMyStackArr :public   clsMyQueue <T>
+class  clsMyStackArr :public   clsMyQueueArr <T>
 {
 
 public:
 
 	void push(T Item)
 	{
-		clsMyQueue <T>::_MyList.InsertAtBeginning(Item);
+		clsMyQueueArr <T>::_MyList.InsertAtBeginning(Item);
 	}
 
 	T Top()
 	{
-		return clsMyQueue <T>::front();
+		return clsMyQueueArr <T>::front();
 
 	}
 
 	T Bottom()
 	{
-		return clsMyQueue <T>::back();
+		return clsMyQueueArr <T>::back();
 
 	}
 
